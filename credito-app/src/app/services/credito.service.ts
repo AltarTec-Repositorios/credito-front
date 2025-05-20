@@ -15,4 +15,7 @@ export class CreditoService {
     return this.http.get<any[]>(`${this.API_URL}/${numeroNfse}`);
   }
 
+  getByNumeroCredito(numeroCredito: string): Observable<any> {
+    return this.http.get<any[]>(`${this.API_URL}/credito/${numeroCredito}`);
+  }
 }

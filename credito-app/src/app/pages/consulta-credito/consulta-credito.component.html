@@ -1,0 +1,131 @@
+<div class="container py-5">
+  <div class="card shadow-lg border-0 bg-light text-dark">
+    <div class="card-header bg-dark text-white text-center">
+      <h3 class="mb-0">🔍 Consulta de Créditos por Número do Crédito</h3>
+    </div>
+
+    <div class="card-body">
+      <!-- Formulário de pesquisa -->
+      <form class="row g-3 align-items-center justify-content-center mb-4">
+        <div class="col-md-6">
+          <label for="nfseInput" class="form-label">Número do Crédito</label>
+          <input id="nfseInput"
+                 [(ngModel)]="numeroCredito"
+                 name="numeroCredito"
+                 type="text"
+                 class="form-control form-control-lg"
+                 placeholder="Ex: 7891011"
+                 required
+                 (focus)="limparMensagem()" />
+        </div>
+        <div class="col-auto mt-4">
+          <button type="button"
+                  class="btn btn-outline-dark btn-lg px-4"
+                  (click)="buscarCredito()">
+            <i class="fas fa-search me-2"></i>Buscar
+          </button>
+        </div>
+      </form>
+
+      <div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        {{ mensagemErro }}
+      </div>
+
+      <!-- Resultados -->
+      <div *ngIf="credito" class="container">
+        <h2 class="mb-4">Consulta de Créditos</h2>
+
+          <div class="card-body">
+            <form>
+              <!-- Nº Crédito -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Nº Crédito</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.numeroCredito" disabled />
+                </div>
+              </div>
+
+              <!-- Nº NFS-e -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Nº NFS-e</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.numeroNfse" disabled />
+                </div>
+              </div>
+
+              <!-- Data de Constituição -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Data Constituição</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.dataConstituicao | date: 'dd/MM/yyyy'" disabled />
+                </div>
+              </div>
+
+              <!-- Valor ISSQN -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Valor ISSQN</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.valorIssqn | currency: 'BRL'" disabled />
+                </div>
+              </div>
+
+              <!-- Tipo de Crédito -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Tipo Crédito</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.tipoCredito" disabled />
+                </div>
+              </div>
+
+              <!-- Simples Nacional -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Simples Nacional</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.simplesNacional ? 'Sim' : 'Não'" disabled />
+                </div>
+              </div>
+
+              <!-- Alíquota (%) -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Alíquota (%)</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.aliquota" disabled />
+                </div>
+              </div>
+
+              <!-- Valor Faturado -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Valor Faturado</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.valorFaturado | currency: 'BRL'" disabled />
+                </div>
+              </div>
+
+              <!-- Valor Dedução -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Valor Dedução</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.valorDeducao | currency: 'BRL'" disabled />
+                </div>
+              </div>
+
+              <!-- Base de Cálculo -->
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Base de Cálculo</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [value]="credito.baseCalculo | currency: 'BRL'" disabled />
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+        <!-- Exibir JSON de créditos -->
+        <div *ngIf="credito" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+          <pre>{{ credito | json }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
