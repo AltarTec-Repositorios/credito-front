@@ -1,0 +1,71 @@
+<div class="container py-5">
+  <div class="card shadow-lg border-0 bg-light text-dark">
+    <div class="card-header bg-dark text-white text-center">
+      <h3 class="mb-0">🔍 Consulta de Créditos por NFS-e</h3>
+    </div>
+
+    <div class="card-body">
+      <!-- Formulário de pesquisa -->
+      <form class="row g-3 align-items-center justify-content-center mb-4">
+        <div class="col-md-6">
+          <label for="nfseInput" class="form-label">Número da NFS-e</label>
+          <input id="nfseInput"
+                 [(ngModel)]="numeroNfse"
+                 name="numeroNfse"
+                 type="text"
+                 class="form-control form-control-lg"
+                 placeholder="Ex: 7891011"
+                 required
+                (focus)="limparMensagem()" />
+        </div>
+        <div class="col-auto mt-4">
+          <button type="button"
+                  class="btn btn-outline-dark btn-lg px-4"
+                  (click)="buscar()">
+            <i class="fas fa-search me-2"></i>Buscar
+          </button>
+        </div>
+      </form>
+
+      <div *ngIf="mensagemErro" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        {{ mensagemErro }}
+      </div>
+
+      <!-- Resultados -->
+      <div *ngIf="creditos?.length" class="table-responsive">
+        <table class="table table-hover table-bordered align-middle text-center bg-white">
+          <thead class="table-secondary">
+          <tr>
+            <th scope="col">Nº Crédito</th>
+            <th scope="col">Data Constituição</th>
+            <th scope="col">Valor ISSQN</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Simples Nacional</th>
+            <th scope="col">Alíquota (%)</th>
+            <th scope="col">Valor Faturado</th>
+            <th scope="col">Valor Dedução</th>
+            <th scope="col">Base de Cálculo</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let c of creditos">
+            <td>{{ c.numeroCredito }}</td>
+            <td>{{ c.dataConstituicao | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ c.valorIssqn | currency: 'BRL' }}</td>
+            <td>{{ c.tipoCredito }}</td>
+            <td>{{ c.simplesNacional ? 'Sim' : 'Não' }}</td>
+            <td>{{ c.aliquota }}</td>
+            <td>{{ c.valorFaturado | currency: 'BRL' }}</td>
+            <td>{{ c.valorDeducao | currency: 'BRL' }}</td>
+            <td>{{ c.baseCalculo | currency: 'BRL' }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="creditos?.length" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+        <pre>{{ creditos | json }}</pre>
+      </div>
+    </div>
+  </div>
+</div>
