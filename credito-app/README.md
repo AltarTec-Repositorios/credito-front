@@ -163,6 +163,21 @@ Os testes também podem ser feitos para garantir que o **serviço de consulta** 
 
 ---
 
+## **Como executar através do docker**
+* **Docker**: Para rodar a aplicação em um container Docker, você pode usar o seguinte comando:
+
+docker build -t credito-app-docker .
+
+* **Docker Run**: Após a construção da imagem, execute o seguinte comando para iniciar o container:
+
+docker run -p 4200:80 credito-app-docker  
+
+* **Acessar a aplicação**: 
+* Acesse a aplicação no navegador em `http://localhost:4200/index.html`
+ 
+
+
+
 ## **Futuras Melhorias**
 
 * **Autenticação e Autorização**: A aplicação pode ser expandida para incluir **autenticação** de usuários e **controle de acesso** para as funcionalidades de consulta.
